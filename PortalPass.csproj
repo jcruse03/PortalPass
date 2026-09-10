@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>PortalPass</AssemblyName>
+    <RootNamespace>Jcruse03.PortalPass</RootNamespace>
+    <Description>Client-side Valheim password injection with endpoint-aware matching</Description>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GamePath Condition="'$(GamePath)' == ''">$(VALHEIM_GAME_PATH)</GamePath>
+    <OutputPath>artifacts/bin/$(Configuration)/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <Target Name="ValidateGamePath" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(GamePath)' == ''" Text="Set VALHEIM_GAME_PATH or pass /p:GamePath=/path/to/Valheim." />
+    <Error Condition="!Exists('$(GamePath)/valheim_Data/Managed/assembly_valheim.dll')" Text="Valheim assemblies were not found below GamePath '$(GamePath)'." />
+  </Target>
+
+  <ItemGroup>
+    <Compile Remove="tests/**/*.cs" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="0Harmony" HintPath="$(GamePath)/BepInEx/core/0Harmony.dll" Private="false" />
+    <Reference Include="assembly_valheim" HintPath="$(GamePath)/valheim_Data/Managed/assembly_valheim.dll" Private="false" />
+    <Reference Include="BepInEx" HintPath="$(GamePath)/BepInEx/core/BepInEx.dll" Private="false" />
+    <Reference Include="UnityEngine" HintPath="$(GamePath)/valheim_Data/Managed/UnityEngine.dll" Private="false" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(GamePath)/valheim_Data/Managed/UnityEngine.CoreModule.dll" Private="false" />
+  </ItemGroup>
+</Project>

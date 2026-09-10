@@ -1,0 +1,7 @@
+{
+  "name": "PortalPass",
+  "version_number": "0.1.0",
+  "website_url": "https://github.com/jcruse03/PortalPass",
+  "description": "Seamlessly supplies per-host or per-endpoint Valheim server passwords from a private local file.",
+  "dependencies": ["denikson-BepInExPack_Valheim-5.4.2350"]
+}

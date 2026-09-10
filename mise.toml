@@ -1,0 +1,21 @@
+[tools]
+dotnet = "10.0.302"
+
+[env]
+VALHEIM_GAME_PATH = "{{config_root}}/.game"
+
+[tasks.test]
+description = "Run endpoint parser and precedence tests"
+run = "dotnet test tests/PortalPass.Tests.csproj --configuration Release"
+
+[tasks.build]
+description = "Build the release DLL against local Valheim 1.0 assemblies"
+run = "dotnet build PortalPass.csproj --configuration Release"
+
+[tasks.package]
+description = "Create the Thunderstore-ready archive"
+run = "bash scripts/package.sh"
+
+[tasks.check]
+description = "Run tests and build the release package"
+depends = ["test", "package"]
