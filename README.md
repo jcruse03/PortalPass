@@ -5,6 +5,18 @@ passwords from a private local file. It works at Valheim's normal password
 handshake, so direct joins and connections initiated by Cross Server Portals
 Continued use the same rules.
 
+## Private by design
+
+**PortalPass does not discover, collect, record, learn, or edit passwords.** You
+create and maintain `passwords.env`; PortalPass only reads it when Valheim asks
+for a password. It never copies a password from manual entry, writes credentials
+back to disk, logs them, or adds them to an exported mod profile.
+
+This is a security feature, not a bug: the player remains the only authority that
+can add or change a saved password. If the file is missing, invalid, or has no
+matching server, PortalPass changes nothing and Valheim shows its normal password
+prompt. The mod will never populate `passwords.env` for you.
+
 ## Made for cross-server portal travel
 
 PortalPass works especially well with
@@ -99,9 +111,9 @@ mise run check
 ```
 
 This builds against the local Valheim 1.0 assemblies, runs pure parser tests, and
-creates `artifacts/PortalPass-v0.1.1.zip`.
+creates `artifacts/PortalPass-v0.1.2.zip`.
 
 ## Status
 
-PortalPass 0.1.1 has passed live client connection tests on Windows and on Linux
+PortalPass has passed live client connection tests on Windows and on Linux
 through Proton, including Valheim's PlayFab backend resolution path.

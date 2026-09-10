@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - 2026-09-10
+
+- Make the read-only, user-controlled password model prominent in the package
+  documentation: PortalPass never collects, records, learns, or edits passwords.
+- Clarify that only the player creates and maintains `passwords.env`, and that
+  vanilla fallback is an intentional safety boundary.
+
 ## 0.1.1 - 2026-09-10
 
 - Preserve the original dedicated host and port when Valheim resolves a direct

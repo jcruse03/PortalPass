@@ -4,8 +4,8 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "jcruse03"
 name = "PortalPass"
-versionNumber = "0.1.1"
-description = "Client-only automatic Valheim server passwords, ideal for seamless Cross Server Portals Continued travel."
+versionNumber = "0.1.2"
+description = "Read-only, user-controlled Valheim server passwords; ideal for seamless Cross Server Portals Continued travel."
 websiteUrl = "https://github.com/jcruse03/PortalPass"
 containsNsfwContent = false
 

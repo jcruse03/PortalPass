@@ -12,7 +12,7 @@ public sealed class PortalPassPlugin : BaseUnityPlugin
 {
     internal const string PluginGuid = "com.jcruse03.portalpass";
     internal const string PluginName = "PortalPass";
-    internal const string PluginVersion = "0.1.1";
+    internal const string PluginVersion = "0.1.2";
 
     internal static ConfigEntry<string> SecretFilePath = null!;
     internal static ManualLogSource Log = null!;
