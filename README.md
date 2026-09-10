@@ -2,8 +2,17 @@
 
 PortalPass is a client-only Valheim 1.0 mod that automatically supplies server
 passwords from a private local file. It works at Valheim's normal password
-handshake, so direct joins and connections initiated by Cross Server Portals use
-the same rules.
+handshake, so direct joins and connections initiated by Cross Server Portals
+Continued use the same rules.
+
+## Made for cross-server portal travel
+
+PortalPass works especially well with
+[Cross Server Portals Continued](https://thunderstore.io/c/valheim/p/jcruse03/Cross_Server_Portals_Continued/)
+([source on GitHub](https://github.com/jcruse03/CrossServerPortals-Continued)).
+When a portal moves you to another password-protected server, PortalPass supplies
+that destination's configured password automatically. The portal mod is optional;
+PortalPass also works with normal direct joins.
 
 ## Why
 
@@ -94,5 +103,5 @@ creates `artifacts/PortalPass-v0.1.1.zip`.
 
 ## Status
 
-Parser and build verification are automated. Treat the first live client join and
-cross-server portal traversal as a canary before broad profile distribution.
+PortalPass 0.1.1 has passed live client connection tests on Windows and on Linux
+through Proton, including Valheim's PlayFab backend resolution path.

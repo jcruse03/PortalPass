@@ -1,0 +1,37 @@
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+namespace = "jcruse03"
+name = "PortalPass"
+versionNumber = "0.1.1"
+description = "Client-only automatic Valheim server passwords, ideal for seamless Cross Server Portals Continued travel."
+websiteUrl = "https://github.com/jcruse03/PortalPass"
+containsNsfwContent = false
+
+[package.dependencies]
+denikson-BepInExPack_Valheim = "5.4.2350"
+
+[build]
+icon = "./icon.png"
+readme = "./README.md"
+outdir = "./artifacts/tcli"
+
+[[build.copy]]
+source = "./artifacts/bin/Release/PortalPass.dll"
+target = "PortalPass.dll"
+
+[[build.copy]]
+source = "./CHANGELOG.md"
+target = "CHANGELOG.md"
+
+[[build.copy]]
+source = "./LICENSE"
+target = "LICENSE"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = ["valheim"]
+
+[publish.categories]
+valheim = ["mods", "utility", "client-side"]
