@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../src/EndpointKey.cs" Link="EndpointKey.cs" />
+    <Compile Include="../src/ConnectionEndpoint.cs" Link="ConnectionEndpoint.cs" />
     <Compile Include="../src/PasswordMap.cs" Link="PasswordMap.cs" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="xunit" Version="2.9.3" />

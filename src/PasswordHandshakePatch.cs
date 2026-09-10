@@ -4,6 +4,22 @@ using HarmonyLib;
 
 namespace Jcruse03.PortalPass;
 
+[HarmonyPatch(typeof(FejdStartup), nameof(FejdStartup.SetServerToJoin))]
+internal static class ServerSelectionPatch
+{
+    private static void Prefix(ServerJoinData serverData)
+    {
+        if (serverData.m_type == ServerJoinDataType.Dedicated)
+        {
+            var dedicated = serverData.Dedicated;
+            ConnectionEndpoint.Capture(dedicated.GetHost(), dedicated.m_port);
+            return;
+        }
+
+        ConnectionEndpoint.Clear();
+    }
+}
+
 [HarmonyPatch(typeof(ZNet), "RPC_ClientHandshake")]
 internal static class PasswordHandshakePatch
 {
@@ -16,15 +32,25 @@ internal static class PasswordHandshakePatch
     {
         ClearOwnedPassword();
         if (!needPassword)
+        {
+            ConnectionEndpoint.Clear();
             return;
+        }
 
-        var host = ServerHostField.GetValue(null) as string;
+        var liveHost = ServerHostField.GetValue(null) as string;
         var portValue = ServerPortField.GetValue(null);
-        if (host == null || string.IsNullOrWhiteSpace(host) || !(portValue is int port))
+        var livePort = portValue is int value ? value : 0;
+        if (!ConnectionEndpoint.TryConsume(liveHost, livePort, out var host, out var port))
+        {
+            PortalPassPlugin.Log.LogWarning("Could not determine the requested dedicated endpoint after backend resolution. Leaving the vanilla password prompt active.");
             return;
+        }
 
         if (!SecretFile.TryResolve(PortalPassPlugin.SecretFilePath.Value, host, port, PortalPassPlugin.Log, out var password))
+        {
+            PortalPassPlugin.Log.LogInfo($"No configured password matched {DisplayEndpoint(host, port)}. Leaving the vanilla password prompt active.");
             return;
+        }
 
         _injectedPassword = password;
         ServerPasswordField.SetValue(null, password);

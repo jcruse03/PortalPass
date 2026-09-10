@@ -5,6 +5,8 @@ namespace Jcruse03.PortalPass;
 
 public sealed class PasswordMapTests
 {
+    public PasswordMapTests() => ConnectionEndpoint.Clear();
+
     [Fact]
     public void ExactEndpointOverridesHostDefault()
     {
@@ -65,5 +67,33 @@ public sealed class PasswordMapTests
         var map = PasswordMap.Parse(new[] { "# fleet", "", "example.com = \"space pass\"" });
         Assert.True(map.TryResolve("example.com", 2456, out var password));
         Assert.Equal("space pass", password);
+    }
+
+    [Fact]
+    public void CapturedDedicatedEndpointSurvivesPlayFabResolution()
+    {
+        ConnectionEndpoint.Capture("Valheim.Example.Net", 2459);
+
+        Assert.True(ConnectionEndpoint.TryConsume(null, 0, out var host, out var port));
+        Assert.Equal("Valheim.Example.Net", host);
+        Assert.Equal(2459, port);
+        Assert.False(ConnectionEndpoint.TryConsume(null, 0, out _, out _));
+    }
+
+    [Fact]
+    public void LiveEndpointIsUsedWhenThereIsNoCapturedDedicatedEndpoint()
+    {
+        Assert.True(ConnectionEndpoint.TryConsume("203.0.113.20", 2456, out var host, out var port));
+        Assert.Equal("203.0.113.20", host);
+        Assert.Equal(2456, port);
+    }
+
+    [Fact]
+    public void NonDedicatedSelectionClearsStaleEndpoint()
+    {
+        ConnectionEndpoint.Capture("old.example.net", 2456);
+        ConnectionEndpoint.Clear();
+
+        Assert.False(ConnectionEndpoint.TryConsume(null, 0, out _, out _));
     }
 }

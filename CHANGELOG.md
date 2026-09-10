@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 - 2026-09-10
+
+- Preserve the original dedicated host and port when Valheim resolves a direct
+  connection to a PlayFab backend before the password handshake.
+- Add safe diagnostics for unavailable and unmatched endpoints without logging
+  passwords.
+
 ## 0.1.0 - 2026-09-10
 
 - Initial client-only Valheim 1.0 release.

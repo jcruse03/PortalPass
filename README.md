@@ -75,6 +75,11 @@ alone. Passwords are never logged or learned from manual entry.
 The file is read fresh at every password handshake, so edits do not require a game
 restart.
 
+Valheim may resolve a dedicated IP or hostname to a PlayFab backend before the
+handshake. PortalPass preserves the original dedicated endpoint for matching, so
+the file continues to use the human-readable host or IP from the join request or
+cross-server portal tag.
+
 ## Development
 
 The local `.game` path must point at a Valheim installation with BepInEx. Then:
@@ -85,7 +90,7 @@ mise run check
 ```
 
 This builds against the local Valheim 1.0 assemblies, runs pure parser tests, and
-creates `artifacts/PortalPass-v0.1.0.zip`.
+creates `artifacts/PortalPass-v0.1.1.zip`.
 
 ## Status
 
